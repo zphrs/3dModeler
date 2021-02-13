@@ -8,3 +8,13 @@
 * do some algorithm that compares the inputted model to the models in the database and returns a score 
 * return 3-5 models
 * add the inputted array of 3D points to the database
+### frontend: 
+#### html:
+* make color palette for ui and dots
+* add button to ask for recommendations
+	* when button is pressed start api request and display loading icon and make button not pressable
+	* when promise is fulfilled stop showing loading icon - if error then make button clickable again and show 
+	error message. If not error then leave button disabled - I'll enable again when a new vertex is added. 
+* add button to export file as .obj file
+#### JS
+* add dots
