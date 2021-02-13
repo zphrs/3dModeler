@@ -2,6 +2,15 @@ const arrow_button = document.getElementById('arrow-button')
 const states = ['fa-arrows-alt-v', 'fa-arrows-alt-h']
 let state = 0
 let inPortrait = window.innerWidth<window.innerHeight;
+const buttons = document.getElementById("buttons")
+if (inPortrait)
+{
+	toggleClassName(buttons, 'portrait')
+}
+else
+{
+	toggleClassName(buttons, 'landscape')
+}
 arrow_button.addEventListener('click', () => {
     const element = document.getElementById('arrow-button')
     toggleClassName(element, 'rotated');
@@ -12,7 +21,6 @@ window.addEventListener("resize", e=>
 	if (inPortrait != tempInPortrait)
 	{
 		inPortrait = tempInPortrait;
-		const buttons = document.getElementById("buttons")
 		toggleClassName(buttons, 'landscape');
 		toggleClassName(buttons, 'portrait');
 	}	

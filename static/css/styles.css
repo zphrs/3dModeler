@@ -1,6 +1,6 @@
 body { 
     margin: 0; 
-    background-color: rgb(23, 35, 71);
+    background-color: black;
 	font-size: 1em;
 }
 @media only screen and (max-width: 850px) {
@@ -39,9 +39,9 @@ body {
     height: 4em;
 	font-size: 1em;
 	border-color: transparent;
-	background-color: blue;
+	background-color: white;
 }
-.buttons {
+#buttons {
 	display: flex;
 	position: fixed;
 	top: 0;
@@ -50,10 +50,6 @@ body {
 	justify-content: center;
 }
 .landscape {
-	display: flex;
-	position: fixed;
-	top: 0;
-	left: 1vw;
 	width: 100%;
 	justify-content: center;
 

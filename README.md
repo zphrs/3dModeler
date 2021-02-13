@@ -12,7 +12,9 @@
 #### html:
 * make color palette for ui and dots
 * add button to ask for recommendations
-	* when button is pressed start api request and display loading icon and make button not pressable
+	* when button is pressed start api request, display loading icon over whole window and grey out icon - also make button not pressable 
+		- "document.getElementById("rec-button").disabled = true;"
+		- "cursor: not-allowed"
 	* when promise is fulfilled stop showing loading icon - if error then make button clickable again and show 
 	error message. If not error then leave button disabled - I'll enable again when a new vertex is added. 
 * add button to export file as .obj file
