@@ -53,6 +53,7 @@ canvas {
 	left: 0;
 	gap: 1em;
 	justify-content: center;
+	z-index: 100;
 }
 .landscape {
 	width: 100%;
