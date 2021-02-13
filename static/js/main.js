@@ -3,14 +3,9 @@ const states = ['fa-arrows-alt-v', 'fa-arrows-alt-h']
 let state = 0
 
 arrow_button.addEventListener('click', () => {
-    ++state;
-    const new_class = states[state % states.length]
-    const old_class = document.getElementById('arrow-button-icon').className
-    let current_class;
-    states.forEach(state => {
-        if (old_class.includes(state))
-            current_class = state;
-    })
-    document.getElementById('arrow-button-icon').className = old_class.replace(current_class, new_class)
-    console.log('clicked')
+    const element = document.getElementById('arrow-button')
+    if (element.className.includes('rotated')) 
+        element.className = element.className.replace('rotated', '')
+    else 
+        element.className += ' rotated'
 })
