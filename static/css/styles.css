@@ -3,6 +3,11 @@ body {
     background-color: black;
 	font-size: 1em;
 }
+canvas {
+	position: fixed;
+	top: 0;
+	left: 0;
+}
 @media only screen and (max-width: 850px) {
 	body {
 	  font-size: 1.25em;
@@ -37,7 +42,7 @@ body {
 	border-radius: 100%;
     width: 4em;
     height: 4em;
-	font-size: 1em;
+	font-size: .75em;
 	border-color: transparent;
 	background-color: white;
 }
