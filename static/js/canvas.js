@@ -1,8 +1,8 @@
 import * as THREE from './three.module.js';
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 1000 );
-
-const renderer = new THREE.WebGLRenderer();
+const canvas = document.getElementById('c');
+const renderer = new THREE.WebGLRenderer({canvas: canvas});
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 let cubes = [];
@@ -16,7 +16,7 @@ for (var x = 0; x<res; x++)
 		for (var z = 0; z<res; z++)
 		{
 			const geometry = new THREE.BoxGeometry(.1, .1, .1);
-			const material = new THREE.MeshBasicMaterial( { color: 0x808080 } );
+			const material = new THREE.MeshBasicMaterial( { color: 0xffffee } );
 			const cube = new THREE.Mesh(geometry, material);
 			parent.attach(cube);
 			cube.position.set(x-res/2+.5, y-res/2+.5, z);
@@ -26,20 +26,19 @@ for (var x = 0; x<res; x++)
 		}
 	}
 }
-cubes.forEach(e=>
-	{
-		scene.add(e);
-	}
-)
-// scene.add(parent);
+scene.add(parent);
+changeBackgroundCol(0xFFFFFF);
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
+const mouseOnDown = new THREE.Vector2();
 camera.position.z = 20;
+
+
 function animate() {
 	requestAnimationFrame( animate );
 	raycaster.setFromCamera( mouse, camera );
 	// calculate objects intersecting the picking ray
-	const intersects = raycaster.intersectObjects( scene.children );
+	const intersects = raycaster.intersectObjects( parent.children );
 
 	for ( let i = 0; i < intersects.length; i ++ ) {
 
@@ -59,13 +58,25 @@ window.addEventListener('resize', e=>
 
 window.addEventListener( 'mousemove', onMouseMove, false );
 function onMouseMove( event ) {
-
-	// calculate mouse position in normalized device coordinates
-	// (-1 to +1) for both components
-
-	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-
+	setMouse(mouse, event);
+}
+function setMouse(vecMouse, event)
+{
+	vecMouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+	vecMouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+}
+canvas.addEventListener('pointerdown', onPointerDown, false);
+function onPointerDown(event)
+{
+	mouseOnDown.set(event.clientX, event.clientY)
 }
 
-window.addEventListener('pointerdown', onPointerDown, false);
+function changeBackgroundCol(col)
+{
+	renderer.setClearColor(col);
+	scene.fog = new THREE.FogExp2(col, .05);
+	cubes.forEach(e=>
+		{
+			e.material.color.set(0xffffff-col);
+		})
+}
