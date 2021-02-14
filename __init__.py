@@ -5,16 +5,16 @@ app = Flask(__name__)
 def main():
     return render_template("index.html")
 
-@app.route("/api/v1/getSimilarModels", methods=['POST'])
-def getSimilarModels():
-	points = json.loads(request.args.get('pts', default='[0, 0, 0, 1, 1, 1]'))
-	output = np.array()
+# @app.route("/api/v1/getSimilarModels", methods=['POST'])
+# def getSimilarModels():
+# 	points = json.loads(request.args.get('pts', default='[0, 0, 0, 1, 1, 1]'))
+# 	output = np.array()
 	
-	return output.tolist()
+# 	return output.tolist()
 
 @app.route("/api/v1/debug/getSimilarModels", methods=['POST'])
 def getSimModelsTemp():
-	return {"objs":[[0, 0, 0, 1, 1, 1, 2, 2, 2], [0, 0, 0, 1, 1, 1, 2, 2, 1]]};
+	return {"objs": [[0, 0, 0, 1, 1, 1, 2, 2, 2], [0, 0, 0, 1, 1, 1, 2, 2, 1]]}
 
 def normalizePts(npArr):
 
