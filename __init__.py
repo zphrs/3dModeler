@@ -14,7 +14,7 @@ def getSimilarModels():
 
 @app.route("/api/v1/debug/getSimilarModels", methods=['POST'])
 def getSimModelsTemp():
-	return [0, 0, 0, 1, 1, 1, 2, 2, 2]
+	return {"objs":[[0, 0, 0, 1, 1, 1, 2, 2, 2], [0, 0, 0, 1, 1, 1, 2, 2, 1]]};
 
 def normalizePts(npArr):
 
