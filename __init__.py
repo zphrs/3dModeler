@@ -5,15 +5,16 @@ app = Flask(__name__)
 def main():
     return render_template("index.html")
 
-@app.route("/api/v1/getSimilarModels", methods=['GET'])
+@app.route("/api/v1/getSimilarModels", methods=['POST'])
 def getSimilarModels():
 	points = json.loads(request.args.get('pts', default='[0, 0, 0, 1, 1, 1]'))
 	output = np.array()
 
 	return output.tolist()
-@app.route("/api/v1/debug/getSimilarModels", methods=['GET'])
+
+@app.route("/api/v1/debug/getSimilarModels", methods=['POST'])
 def getSimModelsTemp():
-	return [0, 0, 0, 1, 1, 1]
+	return [0, 0, 0, 1, 1, 1, 2, 2, 2]
 
 def normalizePts(npArr):
 
