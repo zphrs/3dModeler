@@ -12,6 +12,7 @@ self.app = Flask(__name__)
 self.app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 self.app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DATABASE_URL')
 self.app.secret_key = environ.get('SECRET_KEY')
+postgres_password = environ.get('PASSWORD')
 self.web_url = environ.get('WEB_URL')
 db.init_app(self.app)
 
@@ -32,7 +33,7 @@ with self.app.app_context():
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Password1!@localhost/FlaskAWS'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:'+ postgres_password + '@localhost/FlaskAWS'
 
 db = SQLAlchemy(app)
 
