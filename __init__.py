@@ -14,8 +14,10 @@ def main():
 
 @app.route("/api/v1/debug/getSimilarModels", methods=['POST'])
 def getSimModelsTemp():
-	return {"objs": [[0, 0, 0, 1, 1, 1, 2, 2, 2], [0, 0, 0, 1, 1, 1, 2, 2, 1]]}
-
+	points = json.loads(request.args.get('body', {'pts': '[0, 0, 0, 1, 1, 1]'}).get('pts', '[0, 0, 0, 1, 1, 1]'))
+	return_value = jsonify({"objs":[[0, 0, 0, 1, 1, 1, 2, 2, 2], [0, 0, 0, 1, 1, 1, 2, 2, 1]]})
+	return return_value
+	
 def normalizePts(npArr):
 
 	return npArr
