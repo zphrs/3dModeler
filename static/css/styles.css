@@ -81,16 +81,15 @@ canvas {
 	width: 100%;
 }
 
-.modal {
-	opacity: 0.7;
-	color: black;
-	border-radius: 50%;
+.modal-content {
+	background-color: transparent;
+	border: none;
 }
 
 
 .loader {
-  border: 16px solid #3f3d3d; /* Light grey */
-  border-top: 16px solid var(--foreground); /* Blue */
+  border: 16px solid #ffffff;
+  border-top: 16px solid var(--foreground);
   border-radius: 50%;
   width: 150px;
   height: 150px;

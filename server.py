@@ -12,6 +12,7 @@ def main():
 
 @app.route("/api/v1/getSimilarModels", methods=['POST', 'GET'])
 def getSimilarModels():
+    #NOTE for debugging only, remember to remove
     sleep(2)
     default_pts = [0, 0, 0, 1, 1, 1, 2, 2, 2]
     try:
