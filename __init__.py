@@ -8,4 +8,7 @@ def main():
 @app.route("/api/v1/getSimilarModels", methods=['GET'])
 def getSimilarModels():
 	points = json.loads(request.args.get('pts', default='[0, 0, 0, 1, 1, 1]'))
+	output = np.array()
+
+	return output.tolist()
 app.run(debug=True)

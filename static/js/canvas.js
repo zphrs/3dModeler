@@ -56,7 +56,7 @@ window.addEventListener('resize', e=>
 	camera.updateProjectionMatrix();
 }, false);
 
-window.addEventListener( 'mousemove', onMouseMove, false );
+window.addEventListener( 'mousemove', onMouseMove);
 function onMouseMove( event ) {
 	setMouse(mouse, event);
 }
