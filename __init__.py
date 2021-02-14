@@ -11,8 +11,9 @@ def getSimilarModels():
 	output = np.array()
 
 	return output.tolist()
-
-
+@app.route("/api/v1/debug/getSimilarModels", methods=['GET'])
+def getSimModelsTemp():
+	return [0, 0, 0, 1, 1, 1]
 
 def normalizePts(npArr):
 
@@ -28,7 +29,7 @@ def scoreModel(model, input):
 	return score
 
 def compareModels(listOfModels, npArr):
-
+	''
 	# call score model for each model in list and store score + model
 	# sort the models based on score
 	# return score
