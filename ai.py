@@ -6,16 +6,8 @@ def process_points(points):
 
 #Precondition: we have an array of arrays, each containing a pt [x,y,z]
 def normalizePts(npArr):
-    result = np.empty([len(npArr), 3])
-    for i in range (len(npArr)):
-        result[i] = normalize(npArr[i])
-    return result
-    
-def normalize(v):
-    norm = np.linalg.norm(v)
-    if norm == 0: 
-       return v
-    return v / norm
+    np.amax(npArr)
+    return npArr/np.amax(npArr)
 
 def getModelsInDatabase(npArr):
     listOfModels = np.array()
@@ -49,6 +41,7 @@ def compareModels(listOfModels, npArr):
     pass
 
 print('hello')
+pts = np.array([1, 2, 3, 4, 5, 6])
 pt = [[1,2,3],[4,5,6]]
 print('normalize me')
 print(normalizePts(pt))

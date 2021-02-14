@@ -21,7 +21,6 @@ for (var x = 0; x < res; x++) {
 			const geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1)
 			const material = new THREE.MeshBasicMaterial({ color: 0xffffee })
 			const cube = new THREE.Mesh(geometry, material)
-			parent.attach(cube)
 			cube.position.set(x - res / 2 + 0.5, y - res / 2 + 0.5, z-res/2+.5)
 			cube.position.multiplyScalar(distBetweenDots)
 			cubes.push(cube)
@@ -30,14 +29,17 @@ for (var x = 0; x < res; x++) {
 }
 let dots = cubes.map(e=>
 	{
-		new point(e)
+		return new point(e)
 	})
+dots.forEach(e=>
+	{
+		parent.add(e);
+	});
 scene.add(parent)
 const raycaster = new THREE.Raycaster()
 const mouse = new THREE.Vector2()
-const mouseOnDown = new THREE.Vector2()
 camera.position.z = 20
-const cubeColor = getCSSVar('--selected')
+const cubeColor = new THREE.Color(getCSSVar('--selected'));
 
 changeBackgroundCol(getCSSVar('--background'))
 
@@ -71,6 +73,9 @@ var timeOutEvent, zoomInEvent;
 var rotVel = [0, 0];
 var rot = [0, 0];
 var rotOnDown = [0, 0];
+let zoomDist = 0;
+let zoomAmount = 0;
+let zoomOnDown = 0;
 canvas.addEventListener("pointerdown", e =>
 {
 	rotVel = [0, 0];
@@ -83,6 +88,7 @@ canvas.addEventListener("pointerdown", e =>
 		isHold = false;
 		isDrag = false;
 		rotOnDown = [rot[0], rot[1], 0];
+		zoomOnDown = zoomAmount;
 	}
 });
 canvas.addEventListener("pointerup", pUp);
@@ -106,10 +112,9 @@ function onclick(e)
 	setMouse(mouse, e);
 	raycaster.setFromCamera(mouse, camera)
 	// calculate objects intersecting the picking ray
-	const intersects = raycaster.intersectObjects(parent.children)
-
+	const intersects = raycaster.intersectObjects(scene.children, true)
 	for (let i = 0; i < intersects.length; i++) {
-		intersects[i].object.material.color.set(cubeColor)
+		intersects[i].object.parent.toggle(cubeColor);
 	}
 }
 function setMouse(vecMouse, event) {
@@ -129,9 +134,19 @@ canvas.addEventListener("pointermove", e=>{
 	}
 	if (isPan)
 	{
-		var x = (onDownCoords[1]-e.clientY)/Math.min(window.innerHeight, window.innerWidth);
-		rot[0] = rotOnDown[0] - x*Math.PI*2;
-		rot[0] = Math.min(Math.max(rot[0], -Math.PI/2), Math.PI/2);
+		var y = (onDownCoords[1]-e.clientY)/Math.min(window.innerHeight, window.innerWidth);
+		if (window.arrowBtn_small)
+		{
+			zoomAmount = zoomOnDown + (onDownCoords[1]-e.clientY)/window.innerHeight;
+			zoomDist = .05/(-zoomAmount+1.05);
+			console.log(zoomDist);
+			camera.position.z = zoomDist;
+		}
+		else
+		{
+			rot[0] = rotOnDown[0] - y*Math.PI*2;
+			rot[0] = Math.min(Math.max(rot[0], -Math.PI/2), Math.PI/2);
+		}
 		var x = (onDownCoords[0]-e.clientX)/Math.min(window.innerHeight, window.innerWidth);
 		rot[1] = rotOnDown[1] - x*Math.PI*1.5;
 		parent.setRotationFromEuler(new THREE.Euler(rot[0], rot[1], 0, 'XYZ'));
