@@ -1,24 +1,15 @@
 import numpy as np
-
+import ai
 def process_points(points):
+    ai.compareModels(points, len(points)/3)
     return points + [5, 3, 1, -2, 3]
 
 
-def normalizePts(npArr):
-
-    return npArr
-
-def getModelsInDatabase(npArr):
+def getModelsInDatabase(ptLength):
     listOfModels = np.array()
     return listOfModels
 
 def scoreModel(model, input):
     score = 0
-
     return score
 
-def compareModels(listOfModels, npArr):
-    # call score model for each model in list and store score + model
-    # sort the models based on score
-    # return score
-    pass
