@@ -28,4 +28,5 @@ function magicButtonClicked() {
 		.catch(error => {
 			console.error('Error:', error)
 		})
+
 }
