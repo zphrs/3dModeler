@@ -31,9 +31,9 @@ def scoreModel(model, input):
     # new strat:
     # find the distance b/w the points
     result = 0
-    for i in range(len(model)):
+    for i in range(len(input)):
         # compare the distance between this set of points
-        dist = numpy.linalg.norm(model[i]-input[i])
+        dist = np.linalg.norm(model[i]-input[i])
         result += dist
 
     return result
@@ -51,11 +51,9 @@ def compareModels(listOfModels, npArr):
     scoringArray = np.zeroes(len(listOfModels))
     for i in range(len(listOfModels)):
         # skip this shape if it doesnt have the same amount of points as us
-        if(len(listOfModels[i]) != len(npArr)):
-            continue
         this_shape_normalized = normalizePts(listOfModels[i])
         # get the score for this model vs our shape
-        scoringArray[i] = scoreModel(listOfModels[i], npArr)
+        scoringArray[i] = scoreModel(this_shape_normalized, our_shape_normalized)
 
     # finally, return the one with the least norm. This is our closest guess.
     return scoringArray.index(min(scoringArray))

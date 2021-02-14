@@ -17,7 +17,7 @@ def getSimilarModels():
     default_pts = [0, 0, 0, 1, 1, 1, 2, 2, 2]
     try:
         print(request.get_json())
-        points = json.loads(request.data).get('pts', default_pts)
+        points = request.get_json().get('pts', default_pts)
 
     except json.decoder.JSONDecodeError:
         points = default_pts
