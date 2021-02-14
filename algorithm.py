@@ -18,7 +18,6 @@ def scoreModel(model, input):
     return score
 
 def compareModels(listOfModels, npArr):
-    ''
     # call score model for each model in list and store score + model
     # sort the models based on score
     # return score

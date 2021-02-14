@@ -8,10 +8,17 @@ class point {
 	{
 		this.selected = false;
 		this.mesh = mesh;
+		this.defaultColor = this.mesh.material.color;
+		this.toggleState = false;
 	}
 	select()
 	{
 		this.mesh.object
 		this.selected = true;
+	}
+
+	toggle(color) {
+		this.mesh.material.color.set(this.toggleState ? color: this.defaultColor)
+		this.toggleState = !this.toggleState
 	}
 }
