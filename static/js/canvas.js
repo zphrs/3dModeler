@@ -24,7 +24,6 @@ for (var x = 0; x < res; x++) {
 			parent.attach(cube)
 			cube.position.set(x - res / 2 + 0.5, y - res / 2 + 0.5, z-res/2+.5)
 			cube.position.multiplyScalar(distBetweenDots)
-			// console.log(cube.position)
 			cubes.push(cube)
 		}
 	}
@@ -72,13 +71,16 @@ var timeOutEvent, zoomInEvent;
 var rotVel = [0, 0];
 var rot = [0, 0];
 var rotOnDown = [0, 0];
+<<<<<<< HEAD
 canvas.addEventListener("pointerdown", e=>
+=======
+document.addEventListener("pointerdown", e =>
+>>>>>>> 509d7a20cfade8c4ebfc34913e08472a959737bb
 {
 	rotVel = [0, 0];
 
 	if ((e.pointerType == "mouse" && (e.button == 0)) || e.pointerType != "mouse")
 	{
-		console.log("pointer down");
 		onDownCoords = [e.clientX, e.clientY];
 		topOrBottom = e.clientY/window.innerHeight == .5? 0: e.clientY/window.innerHeight <.5 ?-1:1;
 		down = true;
@@ -95,7 +97,6 @@ function pUp(e)
 	{
 		down = false;
 		isPan = false;
-		console.log("pointer up");
 		clearTimeout(timeOutEvent);
 		clearInterval(zoomInEvent);
 		if (!isHold && !isDrag && (Math.abs(onDownCoords[0]-e.clientX)<10 || Math.abs(onDownCoords[1]-e.clientY)<10))
@@ -128,7 +129,6 @@ canvas.addEventListener("pointermove", e=>{
 	{
 		clearTimeout(timeOutEvent);
 		isHold = false;
-		console.log("here");
 		isPan = true;
 	}
 	if (isPan)

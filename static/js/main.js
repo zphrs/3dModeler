@@ -8,7 +8,7 @@ if (inPortrait) {
 } else {
 	toggleClassName(buttons, 'landscape')
 }
-arrow_button.addEventListener('click', () => {
+arrow_button.addEventListener('click', e => {
 	const element = document.getElementById('arrow-button')
 	toggleClassName(element, 'rotated')
 })
@@ -22,8 +22,15 @@ window.addEventListener('resize', e => {
 	const element = document.getElementById('buttons')
 	if (element.className.includes('landscape')) element.className
 })
+
 function toggleClassName(element, className) {
 	if (element.className.includes(className))
 		element.className = element.className.replace(' ' + className, '')
 	else element.className += ' ' + className
 }
+
+const arrowBtn = document.getElementById('arrow-button')
+window.arrowBtn_small = false;
+arrowBtn.addEventListener('click', e => {
+	window.arrowBtn_small = !window.arrowBtn_small
+})
