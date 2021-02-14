@@ -1,17 +1,12 @@
 const magicButton = document.getElementById('magic-button')
-magicButton.addEventListener('click', magicButtonClicked)
+magicButton.addEventListener('click', updatePointsToServerMagic)
 
-function setLoading(loading) {
-	if (loading) {
-		magicButton.disabled = true
-	} else {
-		magicButton.disabled = true
-	}
+function setLoading(element, loading) {
+	element.disabled = loading
 }
-let response = ""
-function magicButtonClicked() {
-	console.log('clicked')
-	setLoading(true)
+
+function updatePointsToServerMagic() {
+	setLoading(magicButton, true)
 	toggleClassName(magicButton, 'disabled')
 	const data = { pts: [0, 0, 0, 1, 1, 2] }
 

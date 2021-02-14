@@ -1,7 +1,7 @@
 import numpy as np
 
 def process_points(points):
-    return points
+    return points + [5, 3, 1, -2, 3]
 
 
 def normalizePts(npArr):
