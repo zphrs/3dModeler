@@ -3,6 +3,15 @@ magicButton.addEventListener('click', updatePointsToServerMagic)
 
 function setLoading(element, loading) {
 	element.disabled = loading
+
+	$(function () {
+		$('#exampleModal').modal({
+			show: true,
+			backdrop: 'static',
+		})
+		$('#exampleModal').modal(loading ? 'show': 'hide')
+	})
+
 }
 
 function updatePointsToServerMagic() {
@@ -17,7 +26,7 @@ function updatePointsToServerMagic() {
 		.then(response => response.json())
 		.then(data => {
 			console.log('returned ', data)
-			setLoading(false)
+			setLoading(magicButton, false)
 			toggleClassName(magicButton, 'disabled')
 		})
 		.catch(error => {
