@@ -29,8 +29,6 @@ for (var x = 0; x < res; x++) {
 	}
 }
 
-
-
 scene.add(parent)
 const raycaster = new THREE.Raycaster()
 const mouse = new THREE.Vector2()
@@ -70,7 +68,7 @@ window.addEventListener(
 	false
 )
 
-window.addEventListener('mousemove', onMouseMove, false)
+window.addEventListener('mousemove', onMouseMove)
 function onMouseMove(event) {
 	setMouse(mouse, event)
 }
@@ -86,7 +84,6 @@ function onPointerDown(event) {
 function changeBackgroundCol(col) {
 	renderer.setClearColor(col)
 	scene.fog = new THREE.FogExp2(col, 0.05)
-	//set each cube to complimentary color of background
 	cubes.forEach(e => {
 		e.material.color.set(0xffffff - col)
 	})
