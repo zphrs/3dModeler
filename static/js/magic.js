@@ -21,7 +21,7 @@ function updatePointsToServerMagic() {
 
 	fetch('/api/v1/getSimilarModels', {
 		method: 'POST',
-		body: JSON.stringify(data),
+		body: data
 	})
 		.then(response => response.json())
 		.then(data => {
