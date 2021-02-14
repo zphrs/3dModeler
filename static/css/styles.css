@@ -47,11 +47,12 @@ canvas {
     height: 4em;
 	font-size: .75em;
 	border-color: transparent;
-	background-color: white;
+	background-color: var(--button-bg);
 	color: var(--foreground);
+	transition: transform 0.15s ease;
 }
 .button:hover {
-	border: 1px solid black;
+	transform: scale(1.2)
 }
 
 #buttons {
@@ -88,8 +89,8 @@ canvas {
 
 
 .loader {
-  border: 16px solid #ffffff;
-  border-top: 16px solid var(--foreground);
+  border: 16px solid var(--background);
+  border-top: 16px solid var(--button-bg);
   border-radius: 50%;
   width: 150px;
   height: 150px;
