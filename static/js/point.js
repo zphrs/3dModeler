@@ -1,5 +1,5 @@
 import * as THREE from './three.module.js';
-class point {
+export default class point {
 	/**
 	 * 
 	 * @param {THREE.Mesh} geometry 

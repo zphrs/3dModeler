@@ -1,4 +1,5 @@
-import * as THREE from './three.module.js'
+import * as THREE from './three.module.js';
+import point from './point.js';
 const scene = new THREE.Scene()
 const camera = new THREE.PerspectiveCamera(
 	45,
@@ -28,7 +29,10 @@ for (var x = 0; x < res; x++) {
 		}
 	}
 }
-
+let dots = cubes.map(e=>
+	{
+		new point(e)
+	})
 scene.add(parent)
 const raycaster = new THREE.Raycaster()
 const mouse = new THREE.Vector2()
@@ -68,7 +72,7 @@ var timeOutEvent, zoomInEvent;
 var rotVel = [0, 0];
 var rot = [0, 0];
 var rotOnDown = [0, 0];
-document.addEventListener("pointerdown", e=>
+canvas.addEventListener("pointerdown", e=>
 {
 	rotVel = [0, 0];
 
@@ -80,10 +84,10 @@ document.addEventListener("pointerdown", e=>
 		down = true;
 		isHold = false;
 		isDrag = false;
-		rotOnDown = [everyObj.rot[0], everyObj.rot[1], 0];
+		rotOnDown = [rot[0], rot[1], 0];
 	}
 });
-document.addEventListener("pointerup", pUp);
+canvas.addEventListener("pointerup", pUp);
 
 function pUp(e)
 {
@@ -115,7 +119,7 @@ function setMouse(vecMouse, event) {
 	vecMouse.x = (event.clientX / window.innerWidth) * 2 - 1
 	vecMouse.y = -(event.clientY / window.innerHeight) * 2 + 1
 }
-document.addEventListener("pointermove", e=>{
+canvas.addEventListener("pointermove", e=>{
 	if (down && !isDrag && (Math.abs(onDownCoords[0]-e.clientX)>10 || Math.abs(onDownCoords[1]-e.clientY)>10))
 	{
 		isDrag = true;
@@ -135,7 +139,6 @@ document.addEventListener("pointermove", e=>{
 		var x = (onDownCoords[0]-e.clientX)/Math.min(window.innerHeight, window.innerWidth);
 		rot[1] = rotOnDown[1] - x*Math.PI*1.5;
 		parent.setRotationFromEuler(new THREE.Euler(rot[0], rot[1], 0, 'XYZ'));
-		console.log(parent.rotation)
 	}
 })
 
