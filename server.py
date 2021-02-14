@@ -9,13 +9,17 @@ app = Flask(__name__)
 def main():
     return render_template("index.html")
 
-@app.route("/api/v1/getSimilarModels", methods=['POST'])
+@app.route("/api/v1/getSimilarModels", methods=['POST', 'GET'])
 def getSimilarModels():
-	points = json.loads(request.data).get('pts', [0, 0, 0, 1, 1, 1, 2, 2, 2])
-	new_points = algorithm.process_points(points)
-	return_value = jsonify({'pts': new_points})
+    default_pts = [0, 0, 0, 1, 1, 1, 2, 2, 2]
+    try:
+        points = json.loads(request.data).get('pts', default_pts)
 
-	return return_value
+    except json.decoder.JSONDecodeError:
+        points = default_pts
 
+    new_points = algorithm.process_points(points)
+    return_value = jsonify({'pts': new_points})
 
-	
+    return return_value
+

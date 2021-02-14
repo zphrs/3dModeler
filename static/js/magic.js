@@ -15,7 +15,7 @@ function magicButtonClicked() {
 	toggleClassName(magicButton, 'disabled')
 	const data = { pts: [0, 0, 0, 1, 1, 2] }
 
-	fetch('/api/v1/debug/getSimilarModels', {
+	fetch('/api/v1/getSimilarModels', {
 		method: 'POST',
 		body: JSON.stringify(data),
 	})
