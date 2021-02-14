@@ -1,14 +1,9 @@
 import numpy as np
-import ai
+from . import ai
+from . import database
 def process_points(points):
-    return ai.compareModels(points, getModelsInDatabase(len(points)/3))
-
-
-def getModelsInDatabase(ptLength):
-    listOfModels = np.array()
-    return listOfModels
+    return ai.compareModels(database.getModelsInDatabase(points), np.array(points))
 
 def scoreModel(model, input):
     score = 0
     return score
-

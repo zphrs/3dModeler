@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-import json
-import algorithm
+from . import algorithm
 from time import sleep
 
 app = Flask(__name__)
@@ -10,19 +9,13 @@ app = Flask(__name__)
 def main():
     return render_template("index.html")
 
-@app.route("/api/v1/getSimilarModels", methods=['POST', 'GET'])
+@app.route("/api/v1/getSimilarModels", methods=['POST'])
 def getSimilarModels():
     #NOTE for debugging only, remember to remove
-    sleep(2)
-    default_pts = [0, 0, 0, 1, 1, 1, 2, 2, 2]
-    try:
-        print(request.get_json())
-        points = request.get_json().get('pts', default_pts)
-
-    except json.decoder.JSONDecodeError:
-        points = default_pts
-
+    points = request.get_json().get('pts', [])
     new_points = algorithm.process_points(points)
+    if new_points:
+        new_points = new_points.tolist()
     return_value = jsonify({'pts': new_points})
 
     return return_value

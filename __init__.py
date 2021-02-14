@@ -1,3 +1,1 @@
-from server import app
-
-app.run(debug = True)
+from .server import app

@@ -6,12 +6,7 @@ def process_points(points):
 
 #Precondition: we have an array of arrays, each containing a pt [x,y,z]
 def normalizePts(npArr):
-    np.amax(npArr)
-    return npArr/np.amax(npArr)
-
-def getModelsInDatabase(npArr):
-    listOfModels = np.array()
-    return listOfModels
+    return npArr/max(np.amax(npArr), abs(np.amin(npArr)))
 
 def scoreModel(model, input):
     # score = 0
@@ -31,6 +26,7 @@ def scoreModel(model, input):
     # new strat:
     # find the distance b/w the points
     result = 0
+    print(len(input))
     for i in range(len(input)):
         # compare the distance between this set of points
         dist = np.linalg.norm(model[i]-input[i])
@@ -42,24 +38,21 @@ def compareModels(listOfModels, npArr):
     # call score model for each model in list and store score + model
     # sort the models based on score
     # return score
-
-
+    if len(listOfModels) == 0:
+        return
+    npArr = normalizePts(npArr)
+    our_shape_normalized = np.reshape(npArr, (-1, 3))
     # normalize shape
-    our_shape_normalized = normalizePts(npArr)
 
     # contains shape i's score
-    scoringArray = np.zeroes(len(listOfModels))
+    scoringArray = np.zeros(len(listOfModels))
     for i in range(len(listOfModels)):
         # skip this shape if it doesnt have the same amount of points as us
-        this_shape_normalized = normalizePts(listOfModels[i])
         # get the score for this model vs our shape
-        scoringArray[i] = scoreModel(this_shape_normalized, our_shape_normalized)
-
+        scoringArray[i] = scoreModel(listOfModels[i], our_shape_normalized)
+    print(len(listOfModels))
     # finally, return the one with the least norm. This is our closest guess.
-    return scoringArray.index(min(scoringArray))
+    return listOfModels[np.argmin(scoringArray)]
 
-print('hello')
-pts = np.array([1, 2, 3, 4, 5, 6])
-pt = [[1,2,3],[4,5,6]]
-print('normalize me')
-print(normalizePts(pt))
+def sortArr(arr):
+    return arr[np.lexsort((arr[:,1],arr[:,0]))]

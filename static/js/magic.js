@@ -1,25 +1,22 @@
+import * as canvas from './canvas.js';
+
 const magicButton = document.getElementById('magic-button')
 magicButton.addEventListener('click', updatePointsToServerMagic)
 
 function setLoading(element, loading) {
 	element.disabled = loading
-
-	$(function () {
-		$('#exampleModal').modal({
-			show: true,
-			backdrop: 'static',
-		})
-		$('#exampleModal').modal(loading ? 'show': 'hide')
-	})
-
+	if (loading)
+		document.getElementById('modal').style.display = "flex";
+	else
+	document.getElementById('modal').style.display = "none";
 }
 
 function updatePointsToServerMagic() {
 	setLoading(magicButton, true)
 	toggleClassName(magicButton, 'disabled')
-	const data = { pts: [0, 0, 0, 1, 1, 2] }
+	const data = { pts: canvas.getPressedDots() }
 
-	fetch('/api/v1/getSimilarModels', {
+	fetch('api/v1/getSimilarModels', {
 		method: 'POST',
 		headers: {
 			'Accept': 'application/json',
@@ -29,12 +26,14 @@ function updatePointsToServerMagic() {
 	})
 		.then(response => response.json())
 		.then(data => {
-			console.log('returned ', data)
+			console.log('returned ', data.pts)
 			setLoading(magicButton, false)
 			toggleClassName(magicButton, 'disabled')
 		})
-		.catch(error => {
-			console.error('Error:', error)
-		})
+		.catch((error) => {
+			setLoading(magicButton, false)
+			toggleClassName(magicButton, 'disabled')
+			console.log("rip", error);
+		});
 
 }

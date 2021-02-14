@@ -35,6 +35,7 @@ dots.forEach(e=>
 	{
 		parent.add(e);
 	});
+window.dots = dots;
 scene.add(parent)
 const raycaster = new THREE.Raycaster()
 const mouse = new THREE.Vector2()
@@ -74,8 +75,10 @@ var rotVel = [0, 0];
 var rot = [0, 0];
 var rotOnDown = [0, 0];
 let zoomDist = 0;
-let zoomAmount = 0;
-let zoomOnDown = 0;
+let zoomAmount = 1;
+let zoomOnDown = zoomAmount;
+const maxZoom = 20;
+camera.position.z = maxZoom-zoomDist*maxZoom;
 canvas.addEventListener("pointerdown", e =>
 {
 	rotVel = [0, 0];
@@ -137,10 +140,11 @@ canvas.addEventListener("pointermove", e=>{
 		var y = (onDownCoords[1]-e.clientY)/Math.min(window.innerHeight, window.innerWidth);
 		if (window.arrowBtn_small)
 		{
-			zoomAmount = zoomOnDown + (onDownCoords[1]-e.clientY)/window.innerHeight;
+			zoomAmount = zoomOnDown + (-onDownCoords[1]+e.clientY)*2/window.innerHeight;
+			zoomAmount = Math.max(Math.min(1, zoomAmount), 0)
 			zoomDist = .05/(-zoomAmount+1.05);
-			console.log(zoomDist);
-			camera.position.z = zoomDist;
+			camera.position.z = zoomDist*maxZoom;
+
 		}
 		else
 		{
@@ -159,4 +163,14 @@ function changeBackgroundCol(col) {
 	cubes.forEach(e => {
 		e.material.color.set(0xffffff - col)
 	})
+}
+export function getPressedDots()
+{
+	var out = [];
+	for (var i = 0; i<dots.length; i++)
+	{
+		if (dots[i].selected)
+			out.push(dots[i]);
+	}
+	return out;
 }

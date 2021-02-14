@@ -2,46 +2,46 @@
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from os import environ
-import hashlib
-import random
-import string
+import numpy as np
+from .models import db
+import csv
+from pathlib import Path
 
-self.debug = debug
-self.app = Flask(__name__)
-self.app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-self.app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DATABASE_URL')
-self.app.secret_key = environ.get('SECRET_KEY')
-self.web_url = environ.get('WEB_URL')
-db.init_app(self.app)
-
-with self.app.app_context():
-        song_dict_list = []
-        album_query_string = "', '".join(albums.keys()) # will create list like "id1', 'id2', 'id3"
-        query = "SELECT tracks.*, \"albumTracks\".\"albumId\" FROM tracks " + \
-                "LEFT JOIN \"albumTracks\" ON tracks.\"id\" = \"albumTracks\".\"trackId\"" + \
-                "WHERE \"albumTracks\".\"albumId\" IN ('" + album_query_string + "') " + \
-                "LIMIT " + str(self.DB_LIMIT) + ";"
-
-        songs = db.engine.execute(query)
-
-
+script_location = Path(__file__).absolute().parent
+file_location = script_location / 'secret.csv'
+myDict = {}
+with open(file_location, mode='r') as data:
+	for line in csv.DictReader(data):
+		myDict = line
 
 # original config, includes password
 
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Password1!@localhost/FlaskAWS'
+app.config['SQLALCHEMY_DATABASE_URI'] = myDict["DATABASE_URL"]
+db.init_app(app)
+def convertToDict(obj):
+    d = {}
+    for key in obj.keys():
+        d[key] = obj[key]
+    return d
 
-db = SQLAlchemy(app)
+def getModelsInDatabase(pts):
+    with app.app_context():
+        objsOut = []
+        query = "SELECT * FROM obj WHERE length > "+str(len(pts))+";"
+        upload = "INSERT INTO obj (length, points)\n"+"VALUES("+str(len(pts)/3)+", '"+str(pts).replace('[', '{').replace(']', '}')+"');"
+        objs = db.engine.execute(query)
+        for obj in objs:
+            objsOut.append(np.reshape(np.array(obj['points']), (-1, 3)))
+        try:
+            db.engine.execute(upload)
+        except:
+            print('duplicate')
+        return objsOut
 
 
-class Point(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    x = db.Column(db.Integer())
-    y = db.Column(db.Integer())
-    z = db.Column(db.Integer())
 
 
     

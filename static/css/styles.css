@@ -35,7 +35,7 @@ canvas {
 }
 
 .rotated i { 
-    transform:scale(.5); 
+    transform:scale(1, .5); 
     -webkit-transform:scale(1, .5); 
     -moz-transform:scale(1, .5); 
     -o-transform:scale(1, .5); 
@@ -49,10 +49,12 @@ canvas {
 	border-color: transparent;
 	background-color: var(--button-bg);
 	color: var(--foreground);
-	transition: transform 0.15s ease;
+	transition: all 0.25s ease;
+	outline: none;
 }
 .button:hover {
-	transform: scale(1.2)
+	transform: scale(1.2);
+	background-color: var(--button-hover);
 }
 
 #buttons {
@@ -62,7 +64,7 @@ canvas {
 	left: 0;
 	gap: 1em;
 	justify-content: center;
-	z-index: 100;
+	z-index: 1;
 }
 .landscape {
 	width: 100%;
@@ -78,15 +80,24 @@ canvas {
 	color: gray;
 }
 
-.loading-gif {
-	width: 100%;
-}
-
 .modal-content {
 	background-color: transparent;
 	border: none;
 }
 
+.block-screen {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 5; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	justify-content: center;
+}
 
 .loader {
   border: 16px solid var(--background);
