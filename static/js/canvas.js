@@ -21,7 +21,7 @@ for (var x = 0; x < res; x++) {
 			const material = new THREE.MeshBasicMaterial({ color: 0xffffee })
 			const cube = new THREE.Mesh(geometry, material)
 			parent.attach(cube)
-			cube.position.set(x - res / 2 + 0.5, y - res / 2 + 0.5, z)
+			cube.position.set(x - res / 2 + 0.5, y - res / 2 + 0.5, z-res/2+.5)
 			cube.position.multiplyScalar(distBetweenDots)
 			// console.log(cube.position)
 			cubes.push(cube)
