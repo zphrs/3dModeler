@@ -71,11 +71,7 @@ var timeOutEvent, zoomInEvent;
 var rotVel = [0, 0];
 var rot = [0, 0];
 var rotOnDown = [0, 0];
-<<<<<<< HEAD
-canvas.addEventListener("pointerdown", e=>
-=======
-document.addEventListener("pointerdown", e =>
->>>>>>> 509d7a20cfade8c4ebfc34913e08472a959737bb
+canvas.addEventListener("pointerdown", e =>
 {
 	rotVel = [0, 0];
 
