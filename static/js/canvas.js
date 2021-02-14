@@ -23,7 +23,6 @@ for (var x = 0; x < res; x++) {
 			parent.attach(cube)
 			cube.position.set(x - res / 2 + 0.5, y - res / 2 + 0.5, z-res/2+.5)
 			cube.position.multiplyScalar(distBetweenDots)
-			// console.log(cube.position)
 			cubes.push(cube)
 		}
 	}
@@ -68,13 +67,12 @@ var timeOutEvent, zoomInEvent;
 var rotVel = [0, 0];
 var rot = [0, 0];
 var rotOnDown = [0, 0];
-document.addEventListener("pointerdown", e=>
+document.addEventListener("pointerdown", e =>
 {
 	rotVel = [0, 0];
 
 	if ((e.pointerType == "mouse" && (e.button == 0)) || e.pointerType != "mouse")
 	{
-		console.log("pointer down");
 		onDownCoords = [e.clientX, e.clientY];
 		topOrBottom = e.clientY/window.innerHeight == .5? 0: e.clientY/window.innerHeight <.5 ?-1:1;
 		down = true;
@@ -91,7 +89,6 @@ function pUp(e)
 	{
 		down = false;
 		isPan = false;
-		console.log("pointer up");
 		clearTimeout(timeOutEvent);
 		clearInterval(zoomInEvent);
 		if (!isHold && !isDrag && (Math.abs(onDownCoords[0]-e.clientX)<10 || Math.abs(onDownCoords[1]-e.clientY)<10))
@@ -115,7 +112,7 @@ function setMouse(vecMouse, event) {
 	vecMouse.x = (event.clientX / window.innerWidth) * 2 - 1
 	vecMouse.y = -(event.clientY / window.innerHeight) * 2 + 1
 }
-document.addEventListener("pointermove", e=>{
+document.addEventListener("pointermove", e=> {
 	if (down && !isDrag && (Math.abs(onDownCoords[0]-e.clientX)>10 || Math.abs(onDownCoords[1]-e.clientY)>10))
 	{
 		isDrag = true;
@@ -124,7 +121,6 @@ document.addEventListener("pointermove", e=>{
 	{
 		clearTimeout(timeOutEvent);
 		isHold = false;
-		console.log("here");
 		isPan = true;
 	}
 	if (isPan)
@@ -135,7 +131,6 @@ document.addEventListener("pointermove", e=>{
 		var x = (onDownCoords[0]-e.clientX)/Math.min(window.innerHeight, window.innerWidth);
 		rot[1] = rotOnDown[1] - x*Math.PI*1.5;
 		parent.setRotationFromEuler(new THREE.Euler(rot[0], rot[1], 0, 'XYZ'));
-		console.log(parent.rotation)
 	}
 })
 
