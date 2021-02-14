@@ -32,5 +32,6 @@ def compareModels(listOfModels, npArr):
 	# call score model for each model in list and store score + model
 	# sort the models based on score
 	# return score
+	pass
 
 app.run(debug=True)

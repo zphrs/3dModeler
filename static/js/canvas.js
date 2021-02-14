@@ -23,7 +23,7 @@ for (var x = 0; x < res; x++) {
 			parent.attach(cube)
 			cube.position.set(x - res / 2 + 0.5, y - res / 2 + 0.5, z)
 			cube.position.multiplyScalar(distBetweenDots)
-			console.log(cube.position)
+			// console.log(cube.position)
 			cubes.push(cube)
 		}
 	}

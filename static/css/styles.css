@@ -3,6 +3,9 @@ body {
     background-color: black;
 	font-size: 1em;
 }
+* {
+	box-sizing: border-box;
+}
 canvas {
 	position: fixed;
 	top: 0;
@@ -47,6 +50,10 @@ canvas {
 	background-color: white;
 	color: var(--foreground);
 }
+.button:hover {
+	border: 1px solid black;
+}
+
 #buttons {
 	display: flex;
 	position: fixed;
@@ -64,4 +71,8 @@ canvas {
 .portrait {
 	flex-direction: column;
 	height: 100%;
+}
+
+.disabled {
+	color: gray;
 }
