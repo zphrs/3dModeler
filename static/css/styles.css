@@ -45,6 +45,7 @@ canvas {
 	font-size: .75em;
 	border-color: transparent;
 	background-color: white;
+	color: var(--foreground);
 }
 #buttons {
 	display: flex;
