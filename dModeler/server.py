@@ -14,7 +14,7 @@ def getSimilarModels():
     #NOTE for debugging only, remember to remove
     points = request.get_json().get('pts', [])
     new_points = algorithm.process_points(points)
-    if new_points:
+    if new_points.any():
         new_points = new_points.tolist()
     return_value = jsonify({'pts': new_points})
 

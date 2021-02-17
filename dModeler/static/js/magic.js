@@ -14,6 +14,7 @@ function setLoading(element, loading) {
 function updatePointsToServerMagic() {
 	setLoading(magicButton, true)
 	toggleClassName(magicButton, 'disabled')
+	console.log(canvas.getPressedDots())
 	const data = { pts: canvas.getPressedDots() }
 
 	fetch('api/v1/getSimilarModels', {

@@ -169,8 +169,8 @@ export function getPressedDots()
 	var out = [];
 	for (var i = 0; i<dots.length; i++)
 	{
-		if (dots[i].selected)
-			out.push(dots[i]);
+		if (dots[i].toggleState)
+			out.push(dots[i].position.x, dots[i].position.y, dots[i].position.z);
 	}
 	return out;
 }

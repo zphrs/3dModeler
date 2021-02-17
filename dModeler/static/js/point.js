@@ -13,11 +13,6 @@ export default class point extends THREE.Object3D {
 		this.defaultColor = this.mesh.material.color.clone();
 		this.toggleState = false;
 	}
-	select()
-	{
-		this.mesh.object
-		this.selected = true;
-	}
 
 	toggle(color) {
 		this.toggleState = ! this.toggleState;

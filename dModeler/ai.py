@@ -6,7 +6,9 @@ def process_points(points):
 
 #Precondition: we have an array of arrays, each containing a pt [x,y,z]
 def normalizePts(npArr):
-    return npArr/max(np.amax(npArr), abs(np.amin(npArr)))
+    if (npArr):
+        return npArr/max(np.amax(npArr), abs(np.amin(npArr)))
+    return npArr
 
 def scoreModel(model, input):
     # score = 0
